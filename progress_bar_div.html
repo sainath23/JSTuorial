@@ -73,6 +73,11 @@
             for(var i=0; i<10; i++) {
                 (function(index){
                     setTimeout(function() {
+                        if(index == 5) {
+                            alert("Something wrong!");
+                            modal.style.display = "none";
+                            return;
+                        }
                         prgPer.innerHTML = width + 10 + "%";
                         prgBar.style.width = width + 10 + "%";
                         width = width + 10;
