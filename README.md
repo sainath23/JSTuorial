@@ -1,1 +1,1 @@
-# JSTuorial
+# JSTutorial
