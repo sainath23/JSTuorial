@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/JavaScript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    </head>
+    <body>
+        City: <input type="text" id="txtCity" /><br />
+	    Country: <input type="text" id="txtCountry" /><br />
+	    <button id="submit" class="btn btn-default">Submit</button><br />
+	    <div id="resultDiv"></div>
+    </body>
+    <script>
+        $(document).ready(function(){
+            $("#submit").click(function(){
+                var requestData = $("#txtCity").val() + ',' + $("#txtCountry").val();
+                var appid = "2b92ac90c161a8b52a86175509113de9";
+                var resultDiv = $("#resultDiv");
+                alert(requestData);
+                var resultSet = $.getJSON("http://api.openweathermap.org/data/2.5/weather?q=Mumbai,India&appid=2b92ac90c161a8b52a86175509113de9");
+                console.log(resultSet);
+                getWeather(requestData, appid)
+                function getWeather(q, id) {
+                    $.ajax({
+                        url: "http://api.openweathermap.org/data/2.5/weather",
+                        method: "GET",
+                        data: {q: q, appid: id},
+                        dataType: "JSON",
+                        success: function(result) {
+                            resultDiv.html("Weather: " + result.weather[0].main + "<br />" + 
+                                            "Description: " + result.weather[0].description);
+                        }
+                    });
+                }
+            });
+	    });
+    </script>
+</html>
